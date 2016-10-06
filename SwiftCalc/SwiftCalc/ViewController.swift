@@ -169,6 +169,8 @@ class ViewController: UIViewController {
                 return -1 * Double(b)!
             } else if (operation == "%") {
                 return 0.01 * Double(b)!
+            } else {
+                return Double(b)!
             }
         }
         let a1 = Double(a)!
@@ -207,8 +209,10 @@ class ViewController: UIViewController {
         if (currOp == "=") {
             currNum = ""
             currResult = ""
+            isDouble = false
         }
         if currNum == "" {
+            isDouble = false
             currNum = sender.content
         } else if currNum.characters.count < 7 {
             currNum += sender.content
@@ -224,6 +228,7 @@ class ViewController: UIViewController {
             currNum = String(calculate(a:currResult, b: currNum, operation: sender.content))
             if (Double(currNum)! == 0) {
                 currNum = "0"
+                isDouble = false
             }
             updateResultLabel(currNum)
             return
@@ -234,6 +239,7 @@ class ViewController: UIViewController {
             holdOp = ""
             holdNum = ""
             error = false
+            isDouble = false
             updateResultLabel(currResult)
             return
         } else if (sender.content == "=") {
@@ -252,6 +258,7 @@ class ViewController: UIViewController {
             currNum = currResult
             updateResultLabel(currResult)
             currOp = "="
+            isDouble = false
             return
         }
         if (currOp != "") {
@@ -261,6 +268,7 @@ class ViewController: UIViewController {
                 currNum = String(calculate(a: currNum, b: currResult, operation: currOp))
             }
             */
+            isDouble = false
             if (sender.content == "*" || sender.content == "/") {
                 if (currOp == "+" || currOp == "-") {
                     holdNum = currResult
@@ -309,6 +317,7 @@ class ViewController: UIViewController {
             currOp = ""
             currNum = ""
             currResult = ""
+            isDouble = false
         }
         updateResultLabel(String(currResult))
     }
