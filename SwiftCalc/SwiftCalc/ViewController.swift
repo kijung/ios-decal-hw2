@@ -60,7 +60,7 @@ class ViewController: UIViewController {
     // TODO: Ensure that resultLabel gets updated.
     //       Modify this one or create your own.
     func updateResultLabel(_ content: String) {
-        if (error == true) {
+        if (error == true) { //if there is error
             resultLabel.text = "Error"
             currResult = ""
             currNum = ""
@@ -68,28 +68,29 @@ class ViewController: UIViewController {
             holdOp = ""
             return
         }
-        if (Double(content) == 0) {
+        if (Double(content) == 0) { //simply things by making 0 0
             resultLabel.text = "0"
         }
-        if (isDouble && Double(content) == 0) {
-            resultLabel.text = String(Int(content)!)
+        if (isDouble && Double(content) == 0) { //same as above, but 0.0 = 0
+            resultLabel.text = "0"
             return
         }
-        if (content == "") {
+        if (content == "") { //if there is nothing (in the beginning), display 0
             resultLabel.text = "0"
         } else {
             let d = Double(content)!
             let isInteger = floor(d) == d // true
-            if isInteger {
+            if isInteger { //check if double or not
                 resultLabel.text = String(Int(d))
             } else {
                 resultLabel.text = content
             }
         }
-        if resultLabel.text!.characters.count > 7 {
+        if resultLabel.text!.characters.count > 7 { //cases for long numbers
+            //print("FDSFD")
             let d = Double(content)!
             //let isInteger = floor(d) == d // true
-            if d < 10000000 || d > -1000000{ //check if it is smaller than max value
+            if (d < 10000000 || (d < 0 && d > -1000000)) { //check if it is smaller than max value
                 let index = resultLabel.text!.index(resultLabel.text!.startIndex, offsetBy: 7)
                 resultLabel.text = resultLabel.text!.substring(to: index)
             }
